@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:login_with_shared_preferences/login_screen.dart';
 import 'package:login_with_shared_preferences/splash_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(const MyApp());
@@ -40,11 +42,11 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ),
-      body: const Center(
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               'DashBoard',
               style: TextStyle(
                 fontSize: 22,
@@ -52,6 +54,37 @@ class _MyHomePageState extends State<MyHomePage> {
                 color: Colors.black,
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                height: 60,
+                width: 150,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(20),
+                      ),
+                    ),
+                  ),
+                  onPressed: () async {
+                    var sharedPreference = await SharedPreferences.getInstance();
+                    sharedPreference.setBool(SplashScreenState.KEYLOGIN, false);
+
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginScreen(),),);
+                  },
+                  child: const Text(
+                    'Log Out',
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       ),

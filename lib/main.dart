@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login_with_shared_preferences/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MyHomePage(),
+      home: SplashScreen(),
     );
   }
 }
@@ -31,7 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Colors.blue,
         centerTitle: true,
         title: const Text(
-          'Login',
+          'DashBoard',
           style: TextStyle(
             fontSize: 25,
             fontWeight: FontWeight.bold,
@@ -44,7 +45,12 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Login',
+              'DashBoard',
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
             ),
           ],
         ),

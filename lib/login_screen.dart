@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:login_with_shared_preferences/main.dart';
+import 'package:login_with_shared_preferences/splash_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -48,6 +51,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: TextField(
                   controller: emailController,
                   decoration: const InputDecoration(
+                    labelText: 'Email',
+                    labelStyle: TextStyle(color: Colors.blue),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                       borderSide: BorderSide(width: 2, color: Colors.blue),
@@ -63,6 +68,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: TextField(
                   controller: passwordController,
                   decoration: const InputDecoration(
+                    labelText: 'Password',
+                    labelStyle: TextStyle(color: Colors.blue),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                       borderSide: BorderSide(width: 2, color: Colors.blue),
@@ -87,7 +94,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () async {
+                      var sharedPreference = await SharedPreferences.getInstance();
+                      sharedPreference.setBool(SplashScreenState.KEYLOGIN, true);
+
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const MyHomePage(),),);
+                    },
                     child: const Text(
                       'Login',
                       style: TextStyle(
